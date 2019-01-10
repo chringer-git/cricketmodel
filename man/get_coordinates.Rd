@@ -4,9 +4,11 @@
 \alias{get_coordinates}
 \title{Find the cartesian coordinates of a shot give the name of the target.}
 \usage{
-get_coordinates(bed_name, bed_mlt)
+get_coordinates(db, bed_name, bed_mlt)
 }
 \arguments{
+\item{db}{dartboard object created from dartboard::create_dartboard()}
+
 \item{bed_name}{name of the bed (the number of the bed or "Bull")}
 
 \item{bed_mlt}{either "Single", "Double", or "Treble"}

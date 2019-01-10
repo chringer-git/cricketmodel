@@ -1,12 +1,13 @@
 #' Find the cartesian coordinates of a shot give the name of the target.
 #'
+#' @param db dartboard object created from dartboard::create_dartboard()
 #' @param bed_name name of the bed (the number of the bed or "Bull")
 #' @param bed_mlt either "Single", "Double", or "Treble"
 #'
 #' @return target coordinates given the name of the target
 #'
 #' @export
-get_coordinates <- function(bed_name, bed_mlt) {
+get_coordinates <- function(db, bed_name, bed_mlt) {
 
   # If target is not in 1 thru 20, then it has to be the Bullseye.
   if (!bed_name %in% c(1:20)) {

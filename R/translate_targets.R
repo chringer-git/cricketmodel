@@ -22,8 +22,8 @@ translate_targets <- function(db) {
   target_x <- c()
   target_y <- c()
   for (i in 1:length(bmul)) {
-    x <- get_coordinates(bed_name = bval[i], bed_mlt = bmul[i])$x
-    y <- get_coordinates(bed_name = bval[i], bed_mlt = bmul[i])$y
+    x <- get_coordinates(db = db, bed_name = bval[i], bed_mlt = bmul[i])$x
+    y <- get_coordinates(db = db, bed_name = bval[i], bed_mlt = bmul[i])$y
     target_x <- c(target_x, x)
     target_y <- c(target_y, y)
   }

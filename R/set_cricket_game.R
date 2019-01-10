@@ -8,9 +8,6 @@
 #' @export
 set_cricket_game <- function(p1, p2) {
 
-  # Load libraries
-  library(data.table)
-
   # Initialize all marks to zero and apply a record of the marks to each player.
   marks <- data.table::data.table(
     "bed_value" = c(20, 19, 18, 17, 16, 15, 25),

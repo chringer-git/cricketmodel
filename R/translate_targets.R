@@ -7,9 +7,6 @@
 #' @export
 translate_targets <- function(db) {
 
-  # Load libraries
-  library(data.table)
-
   # Build vectors of bed data to place in data.table
   bmul_lab <- rep(db$bed_values$bed_multiplier_label[2:4], 20)
   bmul <- rep(db$bed_values$bed_multiplier[2:4], 20)

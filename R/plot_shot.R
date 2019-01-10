@@ -10,13 +10,9 @@
 #' @export
 plot_shot <- function(xpt, ypt, db_plot, color) {
 
-  # Load libraries
-  library(data.table)
-  library(ggplot2)
-
   # Build a data.table of the points to submit to ggplot2 object.
-  d <- data.table("xpt" = xpt,
-                  "ypt" = ypt)
+  d <- data.table::data.table("xpt" = xpt,
+                              "ypt" = ypt)
 
   # Add the points to the plot.
   db_plot <- db_plot +

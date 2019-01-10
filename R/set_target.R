@@ -8,9 +8,6 @@
 #' @export
 set_target <- function(target, target_dt) {
 
-  # Load libraries
-  library(data.table)
-
   # Find shot in the "targets" data.table
   shot <- target_dt[target_name == target]
 

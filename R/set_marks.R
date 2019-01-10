@@ -7,9 +7,6 @@
 #' @export
 set_marks <- function(gm) {
 
-  # Load libraries
-  library(data.table)
-
   # Set the point differential with respect to the first shooter in the game.
   # This difference will be used to calculate the minimum number of marks needed
   # to close the game.

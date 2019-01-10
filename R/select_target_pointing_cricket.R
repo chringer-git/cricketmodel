@@ -16,9 +16,6 @@
 select_target_pointing_cricket <- function(gm, shooter_player_id,
                                         opponent_player_id) {
 
-  # Load libraries
-  library(data.table)
-
   # If game has a winner, stop.
   if (!is.na(gm$winner)) {
     stop

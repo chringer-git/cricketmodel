@@ -10,21 +10,20 @@
 #' @export
 simulate_game <- function(db, gm, plot_game, verbose = FALSE) {
 
-  # Load libraries
-  library(data.table)
-
+  # Prepare target data
   targets <- translate_targets(db)
   count <- 0
-  #verbose <- TRUE
 
+  # Initialize plot if needed
   if (plot_game) plot_db <- draw_dartboard(db)
 
+  # Players take turns until there is a winner
   while (is.na(gm$winner)){
 
-  #for (i in 1:1000000) {
-
+    # If we find a winner then break -- this is still around
     if (!is.na(gm$winner)) break
 
+    # For each turn alternate players
     count <- count + 1
     if (count %% 2 != 0) {
       shooter <- 1
@@ -38,6 +37,14 @@ simulate_game <- function(db, gm, plot_game, verbose = FALSE) {
     gm$turns <- round(count / 2, 1)
     sidx <- paste0("p", shooter)
 
+    # Have the shooter:
+    #   1. figure out the target
+    #   2. set the target
+    #   3. throw the dart
+    #   4. see where the dart actually hit
+    #   5. update the dartboard and update the game
+    #   6. reset all the marks and differentials with new data
+    #   7. check to see if the shooter won
     for (j in 1:3) {
       target_shot <- gm[[sidx]]$select_shot(gm, shooter, opponent)
       aim_shot    <- set_target(target = target_shot, target_dt = targets)
@@ -52,31 +59,23 @@ simulate_game <- function(db, gm, plot_game, verbose = FALSE) {
                         targets = targets)
       gm <- set_marks(gm)
       if (!is.na(gm$winner)) break
-
     }
 
-    #if (verbose) View(gm)
-    if (!is.na(gm$winner)) break
-
+    # Update the scoreboard of the game
     gm$scoreboard <- data.table::data.table(
       "Player Red" = c(gm$p1$marks$symbol, gm$p1$points),
       " " = c(gm$p1$marks$bed_name, "Points"),
       "Player Black" = c(gm$p2$marks$symbol, gm$p2$points)
       )
     if (verbose) print(gm$scoreboard)
-
   }
 
-  gm$scoreboard <- data.table::data.table(
-    "Player Red" = c(gm$p1$marks$symbol, gm$p1$points),
-    " " = c(gm$p1$marks$bed_name, "Points"),
-    "Player Black" = c(gm$p2$marks$symbol, gm$p2$points)
-  )
-
+  # Build results data object
   sim_results <- list()
   if (plot_game) sim_results$plot_db <- plot_db
   sim_results$gm <- gm
 
+  # Return results of the simulated game
   sim_results
 
 }

@@ -12,9 +12,6 @@
 update_game <- function(gm, shooter_player_id, opponent_player_id,
                         shot_hit, targets_dt) {
 
-  # Load libraries
-  library(data.table)
-
   # Extract the bed name and shot details
   bed_name <- str_split_fixed(string = shot_hit, pattern = " ", n = 2)[[2]]
   shot     <- targets_dt[target_name == shot_hit]

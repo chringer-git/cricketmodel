@@ -8,9 +8,6 @@
 #' @export
 get_coordinates <- function(bed_name, bed_mlt) {
 
-  # Load libraries
-  library(data.table)
-
   # If target is not in 1 thru 20, then it has to be the Bullseye.
   if (!bed_name %in% c(1:20)) {
     radius <- 0

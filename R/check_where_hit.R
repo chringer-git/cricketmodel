@@ -10,9 +10,6 @@
 #' @export
 check_where_hit <- function(x, y, db) {
 
-  # Load libraries
-  library(data.table)
-
   # Get the polar coordinates of the shot.
   pol <- cart_to_pol(x, y)
 

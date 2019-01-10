@@ -10,9 +10,6 @@
 #' @export
 throw_dart <- function(target_x, target_y, sd_factor, random_seed) {
 
-  # Load libraries
-  library(data.table)
-
   # Set random seed if you want to reproduce an exmaple.
   if(!missing(random_seed)){
     set.seed(random_seed)

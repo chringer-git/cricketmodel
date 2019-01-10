@@ -1,0 +1,18 @@
+Package: cricketmodel
+Type: Package
+Title: Model a game of cricket (pub darts)
+Version: 0.1.0
+Authors@R: person("Chris", "Ermatinger", email = "chris.ermatinger@gmail.com", 
+    role = c("aut", "cre"))
+Description: This package models a game of cricket including, shot selection,
+    throwing the dart including error, scoring the game, and a few types of 
+    strategy.
+License: file LICENSE
+Depends:
+    data.table (>= 1.11.8)
+Imports:
+    ggplot2 (>= 3.1.0),
+    dartboard (>= 0.1.0)
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1

@@ -56,10 +56,18 @@ set_cricket_game <- function(p1, p2) {
   # Initialize the total number of turns
   turns <- 0
 
+  # Make scoreboard
+  scoreboard <- data.table::data.table(
+    "Player 1" = c(p1$marks$symbol, p1$points),
+    " " = c(p1$marks$bed_name, "Points"),
+    "Player 2" = c(p2$marks$symbol, p2$points)
+  )
+
   # Build the list of game attributes
   cricket_game <- list()
   cricket_game$p1 <- p1
   cricket_game$p2 <- p2
+  cricket_game$scoreboard <- scoreboard
   cricket_game$turns  <- turns
   cricket_game$winner <- game_winner
 

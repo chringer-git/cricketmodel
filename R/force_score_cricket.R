@@ -15,6 +15,11 @@ force_score_cricket <- function(gm, player_id, bed_val, num_marks, points) {
 
   # Set player id
   sidx <- set_player_id(player_id)
+  if (sidx == "p1") {
+    oidx <- "p2"
+  } else {
+    oidx <- "p1"
+  }
 
   # Set the marks for each bed. The vectors should be
   # bed_val   = c(20, 19, 18, 17, 16, 15, 25)
@@ -36,6 +41,13 @@ force_score_cricket <- function(gm, player_id, bed_val, num_marks, points) {
 
   # Add some symbols better than the actual number of marks.
   gm[[sidx]]$marks$symbol <- set_symbol(gm[[sidx]]$marks$count)
+
+  # Update scoreboard
+  gm$scoreboard <- data.table::data.table(
+    "Player 1" = c(gm[[sidx]]$marks$symbol, gm[[sidx]]$points),
+    " " = c(gm[[sidx]]$marks$bed_name, "Points"),
+    "Player 2" = c(gm[[oidx]]$marks$symbol, gm[[oidx]]$points)
+  )
 
   # Retun new game state.
   gm

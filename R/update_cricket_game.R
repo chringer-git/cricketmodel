@@ -13,7 +13,7 @@ update_game <- function(gm, shooter_player_id, opponent_player_id,
                         shot_hit, targets_dt) {
 
   # Extract the bed name and shot details
-  bed_name <- str_split_fixed(string = shot_hit, pattern = " ", n = 2)[[2]]
+  # bed_name <- str_split_fixed(string = shot_hit, pattern = " ", n = 2)[[2]]
   shot     <- targets_dt[target_name == shot_hit]
 
   # Set player indicies
@@ -64,6 +64,12 @@ update_game <- function(gm, shooter_player_id, opponent_player_id,
     # Set all correct symbols.
     gm[[sidx]]$marks$symbol <- set_symbol(gm[[sidx]]$marks$count)
 
+    gm$scoreboard <- data.table::data.table(
+      "Player Red" = c(gm$p1$marks$symbol, gm$p1$points),
+      " " = c(gm$p1$marks$bed_name, "Points"),
+      "Player Black" = c(gm$p2$marks$symbol, gm$p2$points)
+    )
+
     # Return state of game.
     return(gm)
 
@@ -90,6 +96,12 @@ update_game <- function(gm, shooter_player_id, opponent_player_id,
 
     # Set all correct symbols.
     gm[[sidx]]$marks$symbol <- set_symbol(gm[[sidx]]$marks$count)
+
+    gm$scoreboard <- data.table::data.table(
+      "Player Red" = c(gm$p1$marks$symbol, gm$p1$points),
+      " " = c(gm$p1$marks$bed_name, "Points"),
+      "Player Black" = c(gm$p2$marks$symbol, gm$p2$points)
+    )
 
     # Return state of game.
     return(gm)

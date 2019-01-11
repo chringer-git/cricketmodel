@@ -30,13 +30,13 @@ You can install a development version of dartboard from GitHub with:
 devtools::install_github("chringer-git/dartboard")
 ```
 
+## Walkthough
 
-
-## Example
+### Example 1: Set up cricket game
 
 You can create a couple of players by setting a couple of parameters, then initialize a game.
 
-```{r example}
+```{r create_game_example}
 library(cricketmodel)
 
 # Making a player you only need to know how many mark MPR the player averages.
@@ -50,9 +50,11 @@ gm <- set_cricket_game(p1 = player_1, p2 = player_2)
 knitr::kable(gm$scoreboard, align = rep("c", 3))
 ```
 
-There are a few strategies to choose from when making a player
+### Example 2: Add shot selection to players
 
-```{r}
+Within the package, there are a few methods of selecting shots to choose from when making a player. Examine the code and come up with a new shot selection method to apply to players.
+
+```{r make_player_example}
 
 # Basic strategy
 player_1 <- make_player(average_marks_per_turn = 3, 
@@ -70,9 +72,11 @@ player_1 <- make_player(average_marks_per_turn = 3,
 
 ```
 
+### Example 3: Apply a score straight to the game with force_score_cricket
+
 Once a game has been created you can force a score update to examine.
 
-``` {r}
+```{r force_score_example}
 
 # If you want to update player 1 with 3-20s, 2-19s and 20 points you can submit
 # this to the cricket game object
@@ -85,5 +89,72 @@ new_gm <- force_score_cricket(gm = gm,
 
 # To show the new scoreboard we can look at the 
 knitr::kable(new_gm$scoreboard, align = rep("c", 3))
+```
 
+### Example 4: Target shot for the next player
+
+Given the scoreboard from Example 3, what may be the first shot for player 2?
+```{r target_shot}
+
+# Player 2 is using basic strategy, so the shooter will look to hit 19s to close,
+# then point.
+shot_selection <- new_gm$p2$select_shot(gm = new_gm, 
+                                        shooter_player_id = 2, 
+                                        opponent_player_id = 1)
+
+print(shot_selection)
+
+# Take aim at the shot, show the coordinates
+library(dartboard)
+db       <- create_dartboard()
+aim_shot <- set_target(target = shot_selection, 
+                       target_dt = translate_targets(db))
+
+print(paste0("x coordinate: ", aim_shot$x, ", y coordinate: ", aim_shot$y))
+```
+
+### Example 5: Throw dart at shot_selection, see where it lands
+
+Given the shot selection from Example 4, throw the dart with added error and check to see where it lands on the board.
+
+```{r throw_dart}
+
+# Given the players accuracy shoot the shot and see where get coordinates of where it lands
+throw_shot  <- throw_dart(target_x = aim_shot$x, 
+                          target_y = aim_shot$y, 
+                          sd_factor = gm$p2$sd_factor)
+
+print(paste0("x coordinate: ", throw_shot$x, ", y coordinate: ", throw_shot$y))
+
+# Check to see where it hit the board
+shot_hit <- check_where_hit(x = throw_shot$x, throw_shot$y, db)
+print(shot_hit)
+```
+
+### Example 6: Throw three darts (Examples 4 & 5 combined) and update the scoreboard.
+
+A simple loop to throw three darts in a turn and update the scoreboard.
+```{r simulate_turn_update_scoreboard}
+
+# Run a loop to throw three darts, log the targets and update the scorebaord.
+for (i in 1:3) {
+  shot_selection <- new_gm$p2$select_shot(gm = new_gm, 
+                                        shooter_player_id = 2, 
+                                        opponent_player_id = 1)
+  aim_shot <- set_target(target = shot_selection, 
+                       target_dt = translate_targets(db))
+  throw_shot  <- throw_dart(target_x = aim_shot$x, 
+                          target_y = aim_shot$y, 
+                          sd_factor = gm$p2$sd_factor)
+  shot_hit <- check_where_hit(x = throw_shot$x, throw_shot$y, db)
+  print(paste0("Player 2 shoots: ", shot_selection, " and hits: ", shot_hit))
+  
+  new_gm <- update_game(gm = new_gm,
+                        shooter_player_id = 2,
+                        opponent_player_id = 1,
+                        shot_hit = shot_hit,
+                        targets = translate_targets(db))
+  
+}
+knitr::kable(new_gm$scoreboard, align = rep("c", 3))
 ```

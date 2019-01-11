@@ -32,16 +32,20 @@ You can create a couple of players by setting a couple of parameters, then initi
 ``` r
 library(cricketmodel)
 #> Loading required package: data.table
+#> Loading required package: ggplot2
 #> Loading required package: dartboard
 
 # Making a player you only need to know how many mark MPR the player averages.
-player_1 <- make_player(average_marks_per_turn = 3)
-player_2 <- make_player(average_marks_per_turn = 3.2)
+# A good player.
+player_1 <- make_player(average_marks_per_turn = 3.2)
+
+# A player who is not-as good
+player_2 <- make_player(average_marks_per_turn = 2.2)
 
 # From here you can set a cricket match between the two players
 gm <- set_cricket_game(p1 = player_1, p2 = player_2)
 
-# To show a scoreboard we can look at the 
+# To show a scoreboard we use the knitr package.
 knitr::kable(gm$scoreboard, align = rep("c", 3))
 ```
 
@@ -61,7 +65,6 @@ knitr::kable(gm$scoreboard, align = rep("c", 3))
 Within the package, there are a few methods of selecting shots to choose from when making a player. Examine the code and come up with a new shot selection method to apply to players.
 
 ``` r
-
 # Basic strategy
 player_1 <- make_player(average_marks_per_turn = 3, 
                         select_shot =  select_target_basic_cricket)
@@ -74,7 +77,7 @@ player_1 <- make_player(average_marks_per_turn = 3,
 player_1 <- make_player(average_marks_per_turn = 3, 
                         select_shot =  select_target_pointing_cricket)
 
-# Or you can make your own strategy to submit to the player
+# I hope to allow an easy way to construct target selection strategies to attach to players.
 ```
 
 ### Example 3: Apply a score straight to the game with force\_score\_cricket
@@ -82,10 +85,7 @@ player_1 <- make_player(average_marks_per_turn = 3,
 Once a game has been created you can force a score update to examine.
 
 ``` r
-
-# If you want to update player 1 with 3-20s, 2-19s and 20 points you can submit
-# this to the cricket game object
-
+# If you want to update player 1 with 3-20s, 2-19s and 20 points you can submit this to the cricket game object
 new_gm <- force_score_cricket(gm = gm, 
                               player_id = 1,
                               bed_val = c(20, 19),
@@ -112,7 +112,6 @@ knitr::kable(new_gm$scoreboard, align = rep("c", 3))
 Given the scoreboard from Example 3, what may be the first shot for player 2?
 
 ``` r
-
 # Player 2 is using basic strategy, so the shooter will look to hit 19s to close,
 # then point.
 shot_selection <- new_gm$p2$select_shot(gm = new_gm, 
@@ -137,14 +136,13 @@ print(paste0("x coordinate: ", aim_shot$x, ", y coordinate: ", aim_shot$y))
 Given the shot selection from Example 4, throw the dart with added error and check to see where it lands on the board.
 
 ``` r
-
 # Given the players accuracy shoot the shot and see where get coordinates of where it lands
 throw_shot  <- throw_dart(target_x = aim_shot$x, 
                           target_y = aim_shot$y, 
                           sd_factor = gm$p2$sd_factor)
 
 print(paste0("x coordinate: ", throw_shot$x, ", y coordinate: ", throw_shot$y))
-#> [1] "x coordinate: -1.4184973165253, y coordinate: -4.06009751472465"
+#> [1] "x coordinate: -1.71944278403877, y coordinate: -5.11538185508884"
 
 # Check to see where it hit the board
 shot_hit <- check_where_hit(x = throw_shot$x, throw_shot$y, db)
@@ -157,7 +155,6 @@ print(shot_hit)
 A simple loop to throw three darts in a turn and update the scoreboard.
 
 ``` r
-
 # Run a loop to throw three darts, log the targets and update the scorebaord.
 for (i in 1:3) {
   shot_selection <- new_gm$p2$select_shot(gm = new_gm, 
@@ -179,8 +176,8 @@ for (i in 1:3) {
   
 }
 #> [1] "Player 2 shoots: Treble 19 and hits: Single 19"
-#> [1] "Player 2 shoots: Treble 19 and hits: Single 3"
 #> [1] "Player 2 shoots: Treble 19 and hits: Single 19"
+#> [1] "Player 2 shoots: Treble 19 and hits: Single 7"
 knitr::kable(new_gm$scoreboard, align = rep("c", 3))
 ```
 
@@ -194,3 +191,42 @@ knitr::kable(new_gm$scoreboard, align = rep("c", 3))
 |            | 15     |              |
 |            | Bull   |              |
 |     20     | Points |       0      |
+
+### Example 7: Simulate an entire game with simulate\_game
+
+Give the two players, you can simulate an entire game by looping the logic in Example 6 with simulate\_game.
+
+``` r
+# Simulate game with one function.
+sim_gm <- simulate_game(db = db,
+                        gm = gm,
+                        plot_game = TRUE,
+                        verbose = FALSE)
+```
+
+Show the scoreboad
+
+``` r
+# Show scoreboard
+knitr::kable(sim_gm$gm$scoreboard)
+```
+
+| Player Red |        | Player Black |
+|:-----------|--------|:-------------|
+| 0          | 20     | 0            |
+| 0          | 19     | 0            |
+| 0          | 18     | 0            |
+| 0          | 17     | 0            |
+| 0          | 16     |              |
+| 0          | 15     |              |
+| 0          | Bull   | /            |
+| 190        | Points | 122          |
+
+Show all shots on the dartboard
+
+``` r
+# Show dartboard
+sim_gm$plot_db
+```
+
+<img src="man/figures/README-dartboard_entire_game-1.png" width="100%" />

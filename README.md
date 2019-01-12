@@ -3,20 +3,20 @@
 cricketmodel
 ============
 
-The goal of cricketmodel is to model the decisions of which targets to throw at and the error in making contact with the targets. The game is simulated until a winner emerges.
+The goal of `cricketmodel` is to model the decisions of which targets to throw at and the error in making contact with the targets. The game is simulated until a winner emerges.
 
-cricketmodel should be used in conjuction with my dartboard package
+`cricketmodel` should be used in conjuction with my `dartboard` package
 
 Installation
 ------------
 
-You can install a development version of cricketmodel from [GitHub](https://github.com) with:
+You can install a development version of `cricketmodel` from [GitHub](https://github.com) with:
 
 ``` r
 devtools::install_github("chringer-git/cricketmodel")
 ```
 
-You can install a development version of dartboard from GitHub with:
+You can install a development version of `dartboard` from GitHub with:
 
 ``` r
 devtools::install_github("chringer-git/dartboard")
@@ -25,7 +25,7 @@ devtools::install_github("chringer-git/dartboard")
 Walkthough
 ----------
 
-### Example 1: Set up cricket game
+### Example 1: Set up cricket game with `set_cricket_game`
 
 You can create a couple of players by setting a couple of parameters, then initialize a game.
 
@@ -80,7 +80,7 @@ player_1 <- make_player(average_marks_per_turn = 3,
 # I hope to allow an easy way to construct target selection strategies to attach to players.
 ```
 
-### Example 3: Apply a score straight to the game with force\_score\_cricket
+### Example 3: Apply a score straight to the game with `force_score_cricket`
 
 Once a game has been created you can force a score update to examine.
 
@@ -131,7 +131,7 @@ print(paste0("x coordinate: ", aim_shot$x, ", y coordinate: ", aim_shot$y))
 #> [1] "x coordinate: -1.24572475857401, y coordinate: -3.83394658131484"
 ```
 
-### Example 5: Throw dart at shot\_selection, see where it lands
+### Example 5: Throw dart at `shot_selection`, see where it lands
 
 Given the shot selection from Example 4, throw the dart with added error and check to see where it lands on the board.
 
@@ -192,9 +192,9 @@ knitr::kable(new_gm$scoreboard, align = rep("c", 3))
 |            | Bull   |              |
 |     20     | Points |       0      |
 
-### Example 7: Simulate an entire game with simulate\_game
+### Example 7: Simulate an entire game with `simulate_game`
 
-Give the two players, you can simulate an entire game by looping the logic in Example 6 with simulate\_game.
+Give the two players, you can simulate an entire game by looping the logic in Example 6 with `simulate_game`.
 
 ``` r
 # Simulate game with one function.

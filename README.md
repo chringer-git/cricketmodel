@@ -139,10 +139,11 @@ Given the shot selection from Example 4, throw the dart with added error and che
 # Given the players accuracy shoot the shot and see where get coordinates of where it lands
 throw_shot  <- throw_dart(target_x = aim_shot$x, 
                           target_y = aim_shot$y, 
-                          sd_factor = gm$p2$sd_factor)
+                          sd_factor = gm$p2$sd_factor,
+                          r = db$outer_ring$max_distance)
 
 print(paste0("x coordinate: ", throw_shot$x, ", y coordinate: ", throw_shot$y))
-#> [1] "x coordinate: -1.71944278403877, y coordinate: -5.11538185508884"
+#> [1] "x coordinate: -1.72611486890448, y coordinate: -5.1334302392265"
 
 # Check to see where it hit the board
 shot_hit <- check_where_hit(x = throw_shot$x, throw_shot$y, db)
@@ -164,7 +165,8 @@ for (i in 1:3) {
                        target_dt = translate_targets(db))
   throw_shot  <- throw_dart(target_x = aim_shot$x, 
                           target_y = aim_shot$y, 
-                          sd_factor = gm$p2$sd_factor)
+                          sd_factor = gm$p2$sd_factor,
+                          r = db$outer_ring$max_distance)
   shot_hit <- check_where_hit(x = throw_shot$x, throw_shot$y, db)
   print(paste0("Player 2 shoots: ", shot_selection, " and hits: ", shot_hit))
   
@@ -218,7 +220,7 @@ knitr::kable(sim_gm$gm$scoreboard)
 | 0          | 18     | 0            |
 | 0          | 17     | 0            |
 | 0          | 16     |              |
-| 0          | 15     |              |
+| 0          | 15     | /            |
 | 0          | Bull   | /            |
 | 190        | Points | 122          |
 

@@ -15,16 +15,16 @@ check_where_hit <- function(x, y, db) {
 
   # Find the mark given the polar coordinates.
   # First check if the shot is in the Bullseye.
-  if(pol$radius < max(db$bull_values$max_distance)) {
-    bed_name <- db$bull_values[pol$radius < max_distance &
-                               pol$radius >= min_distance]$bull_label
+  if(pol$radius < max(db$bull_values$max_radius)) {
+    bed_name <- db$bull_values[pol$radius < max_radius &
+                               pol$radius >= min_radius]$bull_label
   } else {
     # If not the Bullseye, then find the bed, and if it hit a single, double,
     # or treble.
-    bed_name <- db$bed_angles[pol$theta < bed_upper_angle &
-                              pol$theta >= bed_lower_angle]$bed_labels
-    bed_mlt <- db$bed_values[pol$radius < max_distance &
-                             pol$radius >= min_distance]$bed_multiplier_label
+    bed_name <- db$bed_thetas[pol$theta < bed_upper_theta &
+                              pol$theta >= bed_lower_theta]$bed_labels
+    bed_mlt <- db$bed_values[pol$radius < max_radius &
+                             pol$radius >= min_radius]$bed_multiplier_label
 
     # If we return nothing, then we missed the board.
     if (length(bed_mlt) == 0) {

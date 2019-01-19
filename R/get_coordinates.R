@@ -15,8 +15,8 @@ get_coordinates <- function(db, bed_name, bed_mlt) {
     theta  <- 0
   } else {
     # If not the Bullseye, then set the target coordinates.
-    radius <- max(db$bed_values[bed_multiplier == bed_mlt]$aim_distance)
-    theta  <- db$bed_angles[bed_value == bed_name]$bed_mid_angle
+    radius <- max(db$bed_values[bed_multiplier == bed_mlt]$aim_radius)
+    theta  <- db$bed_thetas[bed_value == bed_name]$bed_mid_theta
   }
 
   # Build the data list.

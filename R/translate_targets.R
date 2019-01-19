@@ -10,13 +10,13 @@ translate_targets <- function(db) {
   # Build vectors of bed data to place in data.table
   bmul_lab <- rep(db$bed_values$bed_multiplier_label[2:4], 20)
   bmul <- rep(db$bed_values$bed_multiplier[2:4], 20)
-  bmag_min <- rep(db$bed_values$min_distance[2:4], 20)
-  bmag_max <- rep(db$bed_values$max_distance[2:4], 20)
-  bmag <- rep(db$bed_values$aim_distance[2:4], 20)
-  bval <- rep(db$bed_angles$bed_value, 3)
-  bang <- rep(db$bed_angles$bed_mid_angle, 3)
-  bang_min <- rep(db$bed_angles$bed_lower_angle, 3)
-  bang_max <- rep(db$bed_angles$bed_upper_angle, 3)
+  bradius_min <- rep(db$bed_values$min_radius[2:4], 20)
+  bradius_max <- rep(db$bed_values$max_radius[2:4], 20)
+  bradius <- rep(db$bed_values$aim_radius[2:4], 20)
+  bval <- rep(db$bed_thetas$bed_value, 3)
+  btheta <- rep(db$bed_thetas$bed_mid_theta, 3)
+  btheta_min <- rep(db$bed_thetas$bed_lower_theta, 3)
+  btheta_max <- rep(db$bed_thetas$bed_upper_theta, 3)
 
   # Create cartesian coordiates to target given a target name.
   target_x <- c()
@@ -36,10 +36,10 @@ translate_targets <- function(db) {
     "target_bed_value" = bval,
     "target_x" = target_x,
     "target_y" = target_y,
-    "magnitude_min" = bmag_min,
-    "magnitude_max" = bmag_max,
-    "angle_min" = bang_min,
-    "angle_max" = bang_max
+    "radius_min" = bradius_min,
+    "radius_max" = bradius_max,
+    "theta_min" = btheta_min,
+    "theta_max" = btheta_max
     )
   targets <- targets[order(targets$target_bed_value, targets$target_value)]
 
@@ -53,10 +53,10 @@ translate_targets <- function(db) {
       "target_multiplier" = c(1, 2),
       "target_x" = c(0, 0),
       "target_y" = c(0, 0),
-      "magnitude_min" = c(db$bull_values$min_distance),
-      "magnitude_max" = c(db$bull_values$max_distance),
-      "angle_min" = c(-pi / 20, -pi / 20),
-      "angle_max" = c(2 * pi - pi / 20, 2 * pi - pi / 20)
+      "radius_min" = c(db$bull_values$min_radius),
+      "radius_max" = c(db$bull_values$max_radius),
+      "theta_min" = c(-pi / 20, -pi / 20),
+      "theta_max" = c(2 * pi - pi / 20, 2 * pi - pi / 20)
       )
     )
 
@@ -70,10 +70,10 @@ translate_targets <- function(db) {
       "target_multiplier" = 1,
       "target_x" = NA,
       "target_y" = NA,
-      "magnitude_min" = 6 + 7/8,
-      "magnitude_max" = Inf,
-      "angle_min" = -pi / 20,
-      "angle_max" = 2 * pi - pi / 20
+      "radius_min" = 6 + 7/8,
+      "radius_max" = Inf,
+      "theta_min" = -pi / 20,
+      "theta_max" = 2 * pi - pi / 20
       )
     )
 

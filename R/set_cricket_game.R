@@ -56,6 +56,53 @@ set_cricket_game <- function(p1, p2) {
   # Initialize the total number of turns
   turns <- 0
 
+  # Create game shot record
+  shot_record <- data.table::data.table(
+    "player_1_20_count" = 0,
+    "player_1_19_count" = 0,
+    "player_1_18_count" = 0,
+    "player_1_17_count" = 0,
+    "player_1_16_count" = 0,
+    "player_1_15_count" = 0,
+    "player_1_bull_count" = 0,
+    "player_1_20_close" = FALSE,
+    "player_1_19_close" = FALSE,
+    "player_1_18_close" = FALSE,
+    "player_1_17_close" = FALSE,
+    "player_1_16_close" = FALSE,
+    "player_1_15_close" = FALSE,
+    "player_1_bull_close" = FALSE,
+    "player_1_points" = 0,
+    "player_1_marks_to_finish" = 21,
+    "player_1_marks_ahead" = 0,
+    "player_1_darts_to_finish" = 8,
+    "player_1_darts_ahead" = 0,
+    "player_1_turns_to_finish" = 3,
+    "player_1_turns_ahead" = 0,
+    "player_2_20_count" = 0,
+    "player_2_19_count" = 0,
+    "player_2_18_count" = 0,
+    "player_2_17_count" = 0,
+    "player_2_16_count" = 0,
+    "player_2_15_count" = 0,
+    "player_2_bull_count" = 0,
+    "player_2_20_close" = FALSE,
+    "player_2_19_close" = FALSE,
+    "player_2_18_close" = FALSE,
+    "player_2_17_close" = FALSE,
+    "player_2_16_close" = FALSE,
+    "player_2_15_close" = FALSE,
+    "player_2_bull_close" = FALSE,
+    "player_2_points" = 0,
+    "player_2_marks_to_finish" = 21,
+    "player_2_marks_ahead" = 0,
+    "player_2_darts_to_finish" = 8,
+    "player_2_darts_ahead" = 0,
+    "player_2_turns_to_finish" = 3,
+    "player_2_turns_ahead" = 0,
+    "current_turns" = 0
+  )
+
   # Make scoreboard
   scoreboard <- data.table::data.table(
     "Player 1" = c(p1$marks$symbol, p1$points),
@@ -67,6 +114,7 @@ set_cricket_game <- function(p1, p2) {
   cricket_game <- list()
   cricket_game$p1 <- p1
   cricket_game$p2 <- p2
+  cricket_game$shot_record <- shot_record
   cricket_game$scoreboard <- scoreboard
   cricket_game$turns  <- turns
   cricket_game$winner <- game_winner

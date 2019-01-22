@@ -103,6 +103,9 @@ update_game <- function(gm, shooter_player_id, opponent_player_id,
       "Player Black" = c(gm$p2$marks$symbol, gm$p2$points)
     )
 
+    # Update the state of the game
+    gm$shot_record <- udpate_shot_record(gm)
+
     # Return state of game.
     return(gm)
 

@@ -29,6 +29,9 @@ update_game <- function(gm, shooter_player_id, opponent_player_id,
   # If no targets exist in the cricket game, then the shot missed and return the
   # state of the game as it existed prior to the shot.
   if (nrow(op_marks) == 0) {
+    # Update the state of the game
+    gm$shot_record <- udpate_shot_record(gm)
+
     return(gm)
   }
 

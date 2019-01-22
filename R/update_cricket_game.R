@@ -42,7 +42,12 @@ update_game <- function(gm, shooter_player_id, opponent_player_id,
 
   # Shooter and opponent are closed
   if (!sh_marks$open & !op_marks$open) {
+    # Update the state of the game
+    gm$shot_record <- udpate_shot_record(gm)
+
+    # Return state of game.
     return(gm)
+
   } else if (sh_marks$open & !op_marks$open) {
     # Shooter is open, but Opponent is closed, find all marks that apply.
     marks_hit <- shot$target_multiplier
@@ -69,6 +74,9 @@ update_game <- function(gm, shooter_player_id, opponent_player_id,
       " " = c(gm$p1$marks$bed_name, "Points"),
       "Player Black" = c(gm$p2$marks$symbol, gm$p2$points)
     )
+
+    # Update the state of the game
+    gm$shot_record <- udpate_shot_record(gm)
 
     # Return state of game.
     return(gm)

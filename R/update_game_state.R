@@ -1,4 +1,13 @@
-udpate_game_state <- function(gm, shooter_id, dart_num) {
+#' Update the state of the game in the cricket game object.
+#'
+#' @param gm cricket game object
+#' @param shooter_id shooter id either player 1 or palyer 2
+#' @param dart_num the dart that is thrown
+#'
+#' @return a data.table with the state of the game
+#'
+#' @export
+update_game_state <- function(gm, shooter_id, dart_num) {
 
   game_state <- data.table::data.table(
     "p1_20_count" = gm$p1$marks[bed_name == "20"]$count,

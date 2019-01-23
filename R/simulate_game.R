@@ -57,6 +57,7 @@ simulate_game <- function(db, gm, plot_game, verbose = FALSE) {
         plot_db,
         color = color
         )
+      gm <- set_marks(gm)
       gm <- update_cricket_game(
         gm = gm,
         shooter_player_id = shooter,
@@ -65,7 +66,6 @@ simulate_game <- function(db, gm, plot_game, verbose = FALSE) {
         targets = targets,
         dart_num = j
         )
-      gm <- set_marks(gm)
       if (!is.na(gm$winner)) break
     }
 

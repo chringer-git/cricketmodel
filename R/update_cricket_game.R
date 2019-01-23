@@ -9,8 +9,8 @@
 #' @return udpated game object
 #'
 #' @export
-update_game <- function(gm, shooter_player_id, opponent_player_id,
-                        shot_hit, targets_dt) {
+update_cricket_game <- function(gm, shooter_player_id, opponent_player_id,
+                        shot_hit, targets_dt, dart_num) {
 
   # Extract the bed name and shot details
   # bed_name <- str_split_fixed(string = shot_hit, pattern = " ", n = 2)[[2]]
@@ -30,7 +30,7 @@ update_game <- function(gm, shooter_player_id, opponent_player_id,
   # state of the game as it existed prior to the shot.
   if (nrow(op_marks) == 0) {
     # Update the state of the game
-    gm$shot_record <- udpate_shot_record(gm)
+    gm$game_state <- udpate_game_state(gm, sidx, dart_num)
 
     return(gm)
   }
@@ -46,7 +46,7 @@ update_game <- function(gm, shooter_player_id, opponent_player_id,
   # Shooter and opponent are closed
   if (!sh_marks$open & !op_marks$open) {
     # Update the state of the game
-    gm$shot_record <- udpate_shot_record(gm)
+    gm$game_state <- udpate_game_state(gm, sidx, dart_num)
 
     # Return state of game.
     return(gm)
@@ -79,7 +79,7 @@ update_game <- function(gm, shooter_player_id, opponent_player_id,
     )
 
     # Update the state of the game
-    gm$shot_record <- udpate_shot_record(gm)
+    gm$game_state <- udpate_game_state(gm, sidx, dart_num)
 
     # Return state of game.
     return(gm)
@@ -115,7 +115,7 @@ update_game <- function(gm, shooter_player_id, opponent_player_id,
     )
 
     # Update the state of the game
-    gm$shot_record <- udpate_shot_record(gm)
+    gm$game_state <- udpate_game_state(gm, sidx, dart_num)
 
     # Return state of game.
     return(gm)

@@ -4,7 +4,7 @@
 \alias{throw_dart}
 \title{Given a target, finds the actual shot.}
 \usage{
-throw_dart(target_x, target_y, sd_factor, random_seed)
+throw_dart(target_x, target_y, sd_factor, random_seed, r)
 }
 \arguments{
 \item{target_x}{x coordinate of the target}
@@ -14,6 +14,8 @@ throw_dart(target_x, target_y, sd_factor, random_seed)
 \item{sd_factor}{standard deviation}
 
 \item{random_seed}{random seed}
+
+\item{r}{radius of dartboard (to maximum of outer ring)}
 }
 \value{
 coordinates of shot hit

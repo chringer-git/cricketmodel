@@ -51,12 +51,20 @@ simulate_game <- function(db, gm, plot_game, verbose = FALSE) {
       throw_shot  <- throw_dart(target_x = aim_shot$x, target_y = aim_shot$y, sd_factor = gm[[sidx]]$sd_factor, r = db$outer_ring$max_radius)
       shot_hit    <- check_where_hit(x = throw_shot$x, throw_shot$y, db)
       #if (verbose) print(paste(sidx, target_shot, shot_hit, sep = ", "))
-      if (plot_game) plot_db <- plot_shot(xpt = throw_shot$x, throw_shot$y, plot_db, color = color)
-      gm <- update_game(gm = gm,
-                        shooter_player_id = shooter,
-                        opponent_player_id = opponent,
-                        shot_hit = shot_hit,
-                        targets = targets)
+      if (plot_game) plot_db <- plot_shot(
+        xpt = throw_shot$x,
+        throw_shot$y,
+        plot_db,
+        color = color
+        )
+      gm <- update_cricket_game(
+        gm = gm,
+        shooter_player_id = shooter,
+        opponent_player_id = opponent,
+        shot_hit = shot_hit,
+        targets = targets,
+        dart_num = j
+        )
       gm <- set_marks(gm)
       if (!is.na(gm$winner)) break
     }

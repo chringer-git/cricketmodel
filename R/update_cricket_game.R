@@ -63,6 +63,9 @@ update_cricket_game <- function(gm, shooter_player_id, opponent_player_id,
       gm[[sidx]]$marks[bed_value == shot$target_bed_value]$open <- FALSE
     }
 
+    # Update the state of the game
+    gm$game_state <- update_game_state(gm, sidx, dart_num)
+
     # Check to see if all the shooter's marks are closed and is not behind in
     # points. If the shooter has completed the game, set game winner.
     if (!any(gm[[sidx]]$marks$open) & gm[[sidx]]$points >= gm[[oidx]]$points) {
@@ -77,9 +80,6 @@ update_cricket_game <- function(gm, shooter_player_id, opponent_player_id,
       " " = c(gm$p1$marks$bed_name, "Points"),
       "Player Black" = c(gm$p2$marks$symbol, gm$p2$points)
     )
-
-    # Update the state of the game
-    gm$game_state <- update_game_state(gm, sidx, dart_num)
 
     # Return state of game.
     return(gm)
@@ -99,6 +99,9 @@ update_cricket_game <- function(gm, shooter_player_id, opponent_player_id,
       gm[[sidx]]$marks[bed_value == shot$target_bed_value]$open <- FALSE
     }
 
+    # Update the state of the game
+    gm$game_state <- update_game_state(gm, sidx, dart_num)
+
     # Check to see if all the shooter's marks are closed and is not behind in
     # points. If the shooter has completed the game, set game winner.
     if (!any(gm[[sidx]]$marks$open) & gm[[sidx]]$points >= gm[[oidx]]$points) {
@@ -113,9 +116,6 @@ update_cricket_game <- function(gm, shooter_player_id, opponent_player_id,
       " " = c(gm$p1$marks$bed_name, "Points"),
       "Player Black" = c(gm$p2$marks$symbol, gm$p2$points)
     )
-
-    # Update the state of the game
-    gm$game_state <- update_game_state(gm, sidx, dart_num)
 
     # Return state of game.
     return(gm)

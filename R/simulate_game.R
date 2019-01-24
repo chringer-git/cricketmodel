@@ -20,9 +20,6 @@ simulate_game <- function(db, gm, plot_game, verbose = FALSE) {
   # Players take turns until there is a winner
   while (is.na(gm$winner)){
 
-    # If we find a winner then break -- this is still around
-    if (!is.na(gm$winner)) break
-
     # For each turn alternate players
     count <- count + 1
     if (count %% 2 != 0) {
@@ -57,7 +54,6 @@ simulate_game <- function(db, gm, plot_game, verbose = FALSE) {
         plot_db,
         color = color
         )
-      gm <- set_marks(gm)
       gm <- update_cricket_game(
         gm = gm,
         shooter_player_id = shooter,
@@ -66,6 +62,8 @@ simulate_game <- function(db, gm, plot_game, verbose = FALSE) {
         targets = targets,
         dart_num = j
         )
+      gm <- set_marks(gm)
+      gm$game_state <- update_game_state(gm, shooter, dart_num = j)
       if (!is.na(gm$winner)) break
     }
 

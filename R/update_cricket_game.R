@@ -30,7 +30,7 @@ update_cricket_game <- function(gm, shooter_player_id, opponent_player_id,
   # state of the game as it existed prior to the shot.
   if (nrow(op_marks) == 0) {
     # Update the state of the game
-    gm$game_state <- update_game_state(gm, sidx, dart_num)
+    #gm$game_state <- update_game_state(gm, sidx, dart_num)
 
     return(gm)
   }
@@ -64,7 +64,7 @@ update_cricket_game <- function(gm, shooter_player_id, opponent_player_id,
     }
 
     # Update the state of the game
-    gm$game_state <- update_game_state(gm, sidx, dart_num)
+    #gm$game_state <- update_game_state(gm, sidx, dart_num)
 
     # Check to see if all the shooter's marks are closed and is not behind in
     # points. If the shooter has completed the game, set game winner.
@@ -100,7 +100,7 @@ update_cricket_game <- function(gm, shooter_player_id, opponent_player_id,
     }
 
     # Update the state of the game
-    gm$game_state <- update_game_state(gm, sidx, dart_num)
+    #gm$game_state <- update_game_state(gm, sidx, dart_num)
 
     # Check to see if all the shooter's marks are closed and is not behind in
     # points. If the shooter has completed the game, set game winner.

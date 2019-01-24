@@ -57,11 +57,8 @@ update_game_state <- function(gm, shooter_id, dart_num) {
     "dart_num" = dart_num
     )
 
-  game_state <- data.table::data.table(
-    data.table::rbindlist(
-      gm$game_state,
-      game_state
-      )
+  game_state <- data.table::rbindlist(
+    list(gm$game_state, game_state)
     )
 
   # Return game_state

@@ -46,7 +46,7 @@ update_cricket_game <- function(gm, shooter_player_id, opponent_player_id,
   # Shooter and opponent are closed
   if (!sh_marks$open & !op_marks$open) {
     # Update the state of the game
-    gm$game_state <- update_game_state(gm, sidx, dart_num)
+    # gm$game_state <- update_game_state(gm, sidx, dart_num)
 
     # Return state of game.
     return(gm)

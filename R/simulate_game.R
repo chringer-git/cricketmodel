@@ -63,7 +63,8 @@ simulate_game <- function(db, gm, plot_game, verbose = FALSE) {
         dart_num = j
         )
       gm <- set_marks(gm)
-      gm$game_state <- update_game_state(gm, shooter, dart_num = j)
+      gm$game_state <- update_game_state(gm, shooter, dart_num = j, target = target_shot,
+                                         hit = shot_hit)
       if (!is.na(gm$winner)) break
     }
 

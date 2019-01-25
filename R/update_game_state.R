@@ -7,7 +7,7 @@
 #' @return a data.table with the state of the game
 #'
 #' @export
-update_game_state <- function(gm, shooter_id, dart_num) {
+update_game_state <- function(gm, shooter_id, dart_num, target, hit) {
 
   game_state <- data.table::data.table(
     "p1_20_count" = gm$p1$marks[bed_name == "20"]$count,
@@ -54,7 +54,9 @@ update_game_state <- function(gm, shooter_id, dart_num) {
     "p2_turns_ahead" = gm$p2$turns_ahead,
     "current_turns" = gm$turns,
     "shooter_id" = shooter_id,
-    "dart_num" = dart_num
+    "dart_num" = dart_num,
+    "target" = target,
+    "hit" = hit
     )
 
   game_state <- data.table::rbindlist(

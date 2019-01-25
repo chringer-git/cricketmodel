@@ -102,7 +102,9 @@ set_cricket_game <- function(p1, p2) {
     "p2_turns_ahead" = p2$turns_ahead,
     "current_turns" = turns,
     "shooter_id" = NA,
-    "dart_num" = 0
+    "dart_num" = 0,
+    "target" = NA,
+    "hit" = NA
   )
 
   # Make scoreboard

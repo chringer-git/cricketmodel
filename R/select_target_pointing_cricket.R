@@ -13,8 +13,10 @@
 #' @return name of the target
 #'
 #' @export
-select_target_pointing_cricket <- function(gm, shooter_player_id,
-                                        opponent_player_id) {
+select_target_pointing_cricket <- function(gm,
+                                           shooter_player_id,
+                                           opponent_player_id,
+                                           point_opponent_at_one_turn = FALSE) {
 
   # If game has a winner, stop.
   if (!is.na(gm$winner)) {
@@ -22,7 +24,7 @@ select_target_pointing_cricket <- function(gm, shooter_player_id,
   }
 
   # Set if shooter should point opponent if the opponent is within one turn.
-  point_opponent_at_one_turn <- FALSE
+  #point_opponent_at_one_turn <- FALSE
 
   # Set player indicies
   sidx <- set_player_id(shooter_player_id)

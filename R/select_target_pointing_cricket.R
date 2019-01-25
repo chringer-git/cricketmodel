@@ -63,19 +63,22 @@ select_target_pointing_cricket <- function(gm, shooter_player_id,
   }
 
   # Detect whether the shooter is trailing in points.
-  is_trailing_points <- sh_points < op_points + point_pad
+  is_trailing_points <- sh_points < op_points
+
+  # Detect whether the shooter is trailing in points.
+  shoot_points <- sh_points < op_points + point_pad
 
   # If the opponent is within one turn of winning, should we shoot points to
   # increase the opponent's number of turns.
   if (point_opponent_at_one_turn) {
     if (op_turns_to_finish == 1 & nrow(op_marks[open == TRUE]) > 0) {
-      is_trailing_points <- TRUE
+      shoot_points <- TRUE
     }
   }
 
   # If shooter is not trailing (given the desired pad) then shoot the highest
   # open bed, then bull if no bed available.
-  if (!is_trailing_points) {
+  if (!shoot_points) {
     for (i in 1:nrow(sh_marks)) {
       if(sh_marks$open[i]) {
         if (sh_marks$bed_value[i] != 25) {

@@ -46,10 +46,10 @@ library(cricketmodel)
 
 # Making a player you only need to know how many mark MPR the player averages.
 # A good player.
-player_1 <- make_player(average_marks_per_turn = 3.2)
+player_1 <- make_player(mpr = 3.2)
 
 # A player who is not-as good
-player_2 <- make_player(average_marks_per_turn = 2.2)
+player_2 <- make_player(mpr = 2.2)
 
 # From here you can set a cricket match between the two players
 gm <- set_cricket_game(p1 = player_1, p2 = player_2)
@@ -64,15 +64,15 @@ Within the package, there are a few methods of selecting shots to choose from wh
 
 ```{r make_player_example}
 # Basic strategy
-player_1 <- make_player(average_marks_per_turn = 3, 
+player_1 <- make_player(mpr = 3, 
                         select_shot =  select_target_basic_cricket)
 
 # A pro-closing strategy
-player_1 <- make_player(average_marks_per_turn = 3, 
+player_1 <- make_player(mpr = 3, 
                         select_shot =  select_target_closing_cricket)
 
 # A pro-pointing strategy
-player_1 <- make_player(average_marks_per_turn = 3, 
+player_1 <- make_player(mpr = 3, 
                         select_shot =  select_target_pointing_cricket)
 
 # I hope to allow an easy way to construct target selection strategies to attach to players.

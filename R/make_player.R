@@ -1,14 +1,14 @@
 #' Create a player object given a description of the shooter's accruacy and
 #' shot selection strategy
 #'
-#' @param average_marks_per_turn numeric value of a shooter's average marks shot in one turn
+#' @param mpr numeric value of a shooter's average marks per round
 #' @param total_darts_501 numeric value of average total darts shot in a full game of 501
 #' @param select_shot function that decides which target to shoot
 #'
 #' @return player object consisting of accuracy and target selection
 #'
 #' @export
-make_player <- function(average_marks_per_turn, total_darts_501, select_shot) {
+make_player <- function(mpr, total_darts_501, select_shot) {
 
   # If shot selection function is missing use the basic strategy
   if (missing(select_shot)) {
@@ -22,8 +22,8 @@ make_player <- function(average_marks_per_turn, total_darts_501, select_shot) {
   }
 
   # Setting the standard deviation by the marks per turn.
-  if (!missing(average_marks_per_turn)) {
-    sd_factor <- 1.00871 * (1 / average_marks_per_turn) - 0.09929
+  if (!missing(mpr)) {
+    sd_factor <- 1.00871 * (1 / mpr) - 0.09929
   } else {
     sd_factor <- 0.91
   }

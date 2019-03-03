@@ -5,10 +5,10 @@
 \title{Create a player object given a description of the shooter's accruacy and
 shot selection strategy}
 \usage{
-make_player(average_marks_per_turn, total_darts_501, select_shot)
+make_player(mpr, total_darts_501, select_shot)
 }
 \arguments{
-\item{average_marks_per_turn}{numeric value of a shooter's average marks shot in one turn}
+\item{mpr}{numeric value of a shooter's average marks shot in one turn}
 
 \item{total_darts_501}{numeric value of average total darts shot in a full game of 501}
 

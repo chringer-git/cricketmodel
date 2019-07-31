@@ -16,7 +16,7 @@
 select_target_basic_cricket <- function(gm,
                                         shooter_player_id,
                                         opponent_player_id,
-                                        point_opponent_at_one_turn = FALSE) {
+                                        point_opponent_at_one_turn = TRUE) {
 
   # If game has a winner, stop.
   if (!is.na(gm$winner)) {

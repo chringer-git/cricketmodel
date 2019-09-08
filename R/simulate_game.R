@@ -113,11 +113,12 @@ simulate_game <- function(db, gm, targets, iteration, plot_game = FALSE, verbose
 
   gm$game_matrix <- matrix(
     data = gm$game_matrix,
-    ncol = 57,
+    ncol = 59,
     byrow = TRUE
     )
   gm$game_matrix <- as.data.frame(gm$game_matrix)
   colnames(gm$game_matrix) <- c("sim_id", "seed", "iteration",
+                                "p1_mpr",
                                 "p1_min_marks_ahead",
                                 "p1_20_marks", "p1_19_marks", "p1_18_marks", "p1_17_marks", "p1_16_marks", "p1_15_marks", "p1_bb_marks",
                                 "p1_20_open", "p1_19_open", "p1_18_open", "p1_17_open", "p1_16_open", "p1_15_open", "p1_bb_open",
@@ -125,6 +126,7 @@ simulate_game <- function(db, gm, targets, iteration, plot_game = FALSE, verbose
                                 "p1_marks_to_finish", "p1_marks_ahead",
                                 "p1_darts_to_finish", "p1_darts_ahead",
                                 "p1_turns_to_finish", "p1_turns_ahead",
+                                "p2_mpr",
                                 "p2_min_marks_ahead",
                                 "p2_20_marks", "p2_19_marks", "p2_18_marks", "p2_17_marks", "p2_16_marks", "p2_15_marks", "p2_bb_marks",
                                 "p2_20_open", "p2_19_open", "p2_18_open", "p2_17_open", "p2_16_open", "p2_15_open", "p2_bb_open",
@@ -148,7 +150,7 @@ simulate_game <- function(db, gm, targets, iteration, plot_game = FALSE, verbose
   if (plot_game) sim_results$plot_db <- plot_db
   sim_results$gm <- gm
 
-  readr::write_csv(x = gm$game_matrix, paste0("output/games/sim_", gm$sim_id, "_", str_pad(iteration, width = 5, side = "left", pad = "0"), ".csv"))
+  readr::write_csv(x = gm$game_matrix, paste0("output/games/sim_", gm$sim_id, "_", str_pad(iteration, width = 10, side = "left", pad = "0"), ".csv"))
 
   # Return results of the simulated game
   sim_results

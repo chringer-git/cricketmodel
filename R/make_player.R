@@ -30,6 +30,7 @@ make_player <- function(mpr, total_darts_501, select_shot, min_marks_ahead) {
 
   # Build a list that describes the player's accuracy and strategy.
   player <- list()
+  player$mpr <- mpr
   player$sd_factor <- sd_factor
   player$select_shot <- select_shot
   player$min_marks_ahead <- min_marks_ahead
